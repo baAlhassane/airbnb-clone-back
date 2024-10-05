@@ -1,0 +1,18 @@
+logging:
+  level:
+    ROOT: info
+    org.hibernate.SQL: INFO
+    com.alhas.airbnb: INFO
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: postgres
+    password: draslom3
+  jpa:
+    properties:
+      hibernate:
+        default_schema: airbnb_clone
+  liquibase:
+    contexts: prod
+    default-schema: airbnb_clone
