@@ -52,6 +52,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>auth0</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
 			<groupId>com.okta.spring</groupId>
 			<artifactId>okta-spring-boot-starter</artifactId>
 			<version>3.0.7</version>
@@ -68,7 +73,8 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
-			<version>1.5.5.Final</version>
+			<version>${mapstruct.version}</version>
+<!--			<version>1.5.5.Final</version>-->
 		</dependency>
 
 		<dependency>
@@ -106,7 +112,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
+        		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
@@ -115,12 +121,9 @@
 					<target>${java.version}</target>
 					<annotationProcessorPaths>
 						<path>
-							<dependency>
 							<groupId>org.mapstruct</groupId>
-								<artefactId>mapstruct-processor</artefactId>
+								<artifactId>mapstruct-processor</artifactId>
 								<version>${mapstruct.version}</version>
-							</dependency>
-
 						</path>
 					</annotationProcessorPaths>
 				</configuration>

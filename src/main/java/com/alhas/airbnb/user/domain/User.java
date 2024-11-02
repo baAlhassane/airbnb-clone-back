@@ -2,8 +2,10 @@ package com.alhas.airbnb.user.domain;
 
 import com.alhas.airbnb.sharedkernel.domain.AbstractAuditingEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,8 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "airbnb_user")
-public class User extends AbstractAuditingEntity<Long> implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class User extends AbstractAuditingEntity<Long> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator_sequence")
     @SequenceGenerator(name = "user_generator_sequence", sequenceName = "user_generator", allocationSize = 1)
@@ -27,7 +29,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     @Column(name = "image_url")
     private String imageUrl;
-
+    @UuidGenerator
     @Column(name = "public_id", nullable = false)
     private UUID publicId;
     @ManyToMany
@@ -36,6 +38,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")}
     )
     private Set<Authority> authorities=new HashSet<>();
+
 
     @Override
     public Long getId() {
@@ -110,11 +113,13 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", publicId=" + publicId +
+                ", authorities=" + authorities +
                 '}';
     }
 }

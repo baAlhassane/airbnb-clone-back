@@ -38,13 +38,13 @@ spring:
       max-request-size: 100MB
 server:
   port: 8080
-
-#okta:
-#  oauth2:
-#    issuer: https://airbnb-clone.us.auth0.com/
-#    client-id: ${AUTH0_CLIENT_ID}
-#    client-secret: ${AUTH0_CLIENT_SECRET}
+# dev-lbu4c820m2nza8vh.us.auth0.com
+okta:
+  oauth2:
+    issuer: https://dev-lbu4c820m2nza8vh.us.auth0.com/
+    client-id: ${AUTH0_CLIENT_ID}
+    client-secret: ${AUTH0_CLIENT_SECRET}
 
 application:
   auth0:
-    role-landlord-id: rol_v1CpFU8josLg8YjC
+    role-landlord-id: rol_bMjiQLmAN3LUSbqi

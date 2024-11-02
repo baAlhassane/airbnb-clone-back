@@ -43,7 +43,10 @@ public class Authority implements Serializable {
         return Objects.hashCode(name);
     }
 
-    public  int x(){
-        return 1;
+    @Override
+    public String toString() {
+        return "Authority{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

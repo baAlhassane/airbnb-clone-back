@@ -110,6 +110,22 @@ public class Listing extends AbstractAuditingEntity<Long> {
         this.beds = beds;
     }
 
+    public int getBedrooms() {
+        return bedrooms;
+    }
+
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public UUID getLandlordPublicId() {
+        return landlordPublicId;
+    }
+
+    public void setLandlordPublicId(UUID landlordPublicId) {
+        this.landlordPublicId = landlordPublicId;
+    }
+
     public int getBathrooms() {
         return bathrooms;
     }
