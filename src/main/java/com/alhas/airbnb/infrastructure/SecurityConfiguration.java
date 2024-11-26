@@ -29,22 +29,24 @@ public class SecurityConfiguration {
         CsrfTokenRequestAttributeHandler requestAttributeHandler = new CsrfTokenRequestAttributeHandler();
         requestAttributeHandler.setCsrfRequestAttributeName(null);
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest()
-                .authenticated())
-                .csrf(csrfToken ->csrfToken.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .authenticated())
+                .csrf(csrfToken -> csrfToken.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestAttributeHandler))
                 .oauth2Login(Customizer.withDefaults())
-                .oauth2ResourceServer(auth2ResourceServer ->auth2ResourceServer.jwt(Customizer.withDefaults()))
+                .oauth2ResourceServer(auth2ResourceServer -> auth2ResourceServer.jwt(Customizer.withDefaults()))
                 .oauth2Client(Customizer.withDefaults());
-               return http.build();
+        return http.build();
     }
 
+
+
     @Bean
-    public GrantedAuthoritiesMapper userAuthoritiesMapper() {
+    public GrantedAuthoritiesMapper    userAuthoritiesMapper() {
         return authorities -> {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
             authorities.forEach(grantedAuthority -> {
-                if(grantedAuthority instanceof OidcUserAuthority oidcUserAuthority) {
+                if (grantedAuthority instanceof OidcUserAuthority oidcUserAuthority) {
                     grantedAuthorities.addAll(SecurityUtils
                             .extractAuthorityFromClaims(oidcUserAuthority.
                                     getUserInfo().getClaims()));

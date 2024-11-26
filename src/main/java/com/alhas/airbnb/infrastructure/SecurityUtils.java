@@ -23,22 +23,18 @@ public class SecurityUtils {
       String sub =String.valueOf(attributes.get("sub"));
 
       String username = null ;
-
       if(attributes.get("preferred_username")!=null){
           username = ((String)  attributes.get("preferred_username")).toLowerCase();
       }
-
         if(attributes.get("given_name")!=null){
             user.setFirstName(((String)  attributes.get("given_name")).toLowerCase());
         }
         else if (attributes.get("nickname")!=null){
             user.setFirstName(((String)  attributes.get("nickname")).toLowerCase());
         }
-
         if(attributes.get("family_name")!=null){
             user.setLastName(((String)  attributes.get("family_name")));
         }
-
         if(attributes.get("email")!=null){
             user.setEmail(((String)  attributes.get("email")).toLowerCase());
         }
@@ -48,12 +44,9 @@ public class SecurityUtils {
         else {
             user.setEmail(sub);
         }
-
         if(attributes.get("picture")!=null){
             user.setImageUrl(((String)  attributes.get("picture")));
         }
-
-
         if(attributes.get(CLAIMS_NAMESPACE)!=null){
             List<String> auithoritiesRaw= (List<String>) attributes.get(CLAIMS_NAMESPACE);
             Set<Authority> authorities = auithoritiesRaw.stream()
@@ -65,7 +58,6 @@ public class SecurityUtils {
 
             user.setAuthorities(authorities);
         }
-
 
         return user;
     }

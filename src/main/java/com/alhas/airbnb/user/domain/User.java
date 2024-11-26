@@ -29,9 +29,11 @@ public class User extends AbstractAuditingEntity<Long> {
 
     @Column(name = "image_url")
     private String imageUrl;
+
     @UuidGenerator
     @Column(name = "public_id", nullable = false)
     private UUID publicId;
+
     @ManyToMany
     @JoinTable(name = "user_authority",
     joinColumns= {@JoinColumn(name = "user_id", referencedColumnName = "id")},
@@ -119,7 +121,7 @@ public class User extends AbstractAuditingEntity<Long> {
                 ", email='" + email + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", publicId=" + publicId +
-                ", authorities=" + authorities +
+                ", authorities="  + "null"+
                 '}';
     }
 }

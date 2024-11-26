@@ -23,8 +23,9 @@ public class Listing extends AbstractAuditingEntity<Long> {
     @Column(name = "id")
     private Long id;
 
-    @UuidGenerator
-    @Column(name = "public_id", nullable = false)
+
+//    @Column(name = "public_id")
+@Column(name = "public_id", nullable = false, unique = true, updatable = false)
     private UUID publicId;
 
     private  String title;
@@ -47,6 +48,7 @@ public class Listing extends AbstractAuditingEntity<Long> {
 
     @Column(name = "price")
     private int price   ;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private BookingCategory bookingCategory;
@@ -61,6 +63,13 @@ public class Listing extends AbstractAuditingEntity<Long> {
     private Set<ListingPicture> pictures=new HashSet<>();
 
 
+    // Avant de persister, générer un UUID s'il n'est pas défini
+    @PrePersist
+    private void generatePublicId() {
+        if (publicId == null) {
+            publicId = UUID.randomUUID();
+        }
+    }
     @Override
     public Long getId() {
         return id;

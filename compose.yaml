@@ -1,6 +1,7 @@
 services:
   postgres:
     image: 'postgres:latest'
+    container_name: airbnb-container
     environment:
       - 'POSTGRES_DB=mydb'
       - 'POSTGRES_PASSWORD=draslom3'
@@ -8,4 +9,11 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
+#    volumes:
+#      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+
+
+

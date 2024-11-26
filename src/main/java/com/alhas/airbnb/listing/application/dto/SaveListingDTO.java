@@ -13,27 +13,29 @@ import java.util.List;
 
 public class SaveListingDTO {
     @NotNull
-    BookingCategory bookingCategory;
+    BookingCategory category;
     @NotNull
     String location;
-    @NotNull
-    @Valid
-    ListingInfoDTO listingInfoDTO;
-    @NotNull
-    @Valid
-    DescritionDTO descriptionDTO;
-    @NotNull
-    @Valid
-    PriceVO priceVO;
-    @NotNull
-    List<PictureDTO> picturesDTO;
 
-    public @NotNull BookingCategory getBookingCategory() {
-        return bookingCategory;
+
+
+    @NotNull @Valid
+    ListingInfoDTO infos;
+    @NotNull
+    @Valid
+    DescritionDTO description;
+    @NotNull
+    @Valid
+    PriceVO price;
+    @NotNull
+    List<PictureDTO> pictures;
+
+    public @NotNull BookingCategory getCategory() {
+        return category;
     }
 
-    public void setBookingCategory(@NotNull BookingCategory bookingCategory) {
-        this.bookingCategory = bookingCategory;
+    public void setCategory(@NotNull BookingCategory category) {
+        this.category = category;
     }
 
     public @NotNull String getLocation() {
@@ -44,35 +46,35 @@ public class SaveListingDTO {
         this.location = location;
     }
 
-    public @NotNull @Valid ListingInfoDTO getListingInfoDTO() {
-        return listingInfoDTO;
+    public @NotNull @Valid ListingInfoDTO getInfos() {
+        return infos;
     }
 
-    public void setListingInfoDTO(@NotNull @Valid ListingInfoDTO listingInfoDTO) {
-        this.listingInfoDTO = listingInfoDTO;
+    public void setInfos(@NotNull @Valid ListingInfoDTO infos) {
+        this.infos = infos;
     }
 
-    public @NotNull @Valid DescritionDTO getDescriptionDTO() {
-        return descriptionDTO;
+    public @NotNull @Valid DescritionDTO getDescription() {
+        return description;
     }
 
-    public void setDescriptionDTO(@NotNull @Valid DescritionDTO descriptionDTO) {
-        this.descriptionDTO = descriptionDTO;
+    public void setDescription(@NotNull @Valid DescritionDTO description) {
+        this.description = description;
     }
 
-    public @NotNull @Valid PriceVO getPriceVO() {
-        return priceVO;
+    public @NotNull @Valid PriceVO getPrice() {
+        return price;
     }
 
-    public void setPriceVO(@NotNull @Valid PriceVO priceVO) {
-        this.priceVO = priceVO;
+    public void setPrice(@NotNull @Valid PriceVO price) {
+        this.price = price;
     }
 
-    public @NotNull List<PictureDTO> getPicturesDTO() {
-        return picturesDTO;
+    public @NotNull List<PictureDTO> getPictures() {
+        return pictures;
     }
 
-    public void setPicturesDTO(@NotNull List<PictureDTO> picturesDTO) {
-        this.picturesDTO = picturesDTO;
+    public void setPictures(@NotNull List<PictureDTO> pictures) {
+        this.pictures = pictures;
     }
 }

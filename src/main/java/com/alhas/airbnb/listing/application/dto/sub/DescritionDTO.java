@@ -5,8 +5,8 @@ import com.alhas.airbnb.listing.application.dto.vo.TitleVO;
 import jakarta.validation.constraints.NotNull;
 
 public record DescritionDTO(
-        @NotNull TitleVO titleVO,
-        @NotNull DescriptionVO descriptionVO
+        @NotNull TitleVO title,
+        @NotNull DescriptionVO description
 
         
 ) {

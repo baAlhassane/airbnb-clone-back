@@ -9,6 +9,7 @@ public record PictureDTO(
         @NotNull String fileContentType,
         @NotNull  boolean isCover
 
+
 ) {
     @Override
     public boolean equals(Object o) {

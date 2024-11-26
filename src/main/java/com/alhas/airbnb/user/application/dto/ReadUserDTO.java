@@ -68,4 +68,16 @@ public class ReadUserDTO {
     public void setPublicI(UUID publicI) {
         this.publicId = publicI;
     }
+
+    @Override
+    public String toString() {
+        return "ReadUserDTO{" +
+                "publicId=" + publicId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

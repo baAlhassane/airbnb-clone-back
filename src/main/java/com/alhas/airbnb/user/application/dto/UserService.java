@@ -34,6 +34,10 @@ public class UserService {
                 .getAuthentication().
                 getPrincipal();
         User user = SecurityUtils.mapOauth2AttributesToUser(principal.getAttributes());
+        System.out.println("---------------------");
+        System.out.println(" OAuth2User principal = (OAuth2User) SecurityContextHolder.getContext() =  "+ principal);
+        System.out.println(" user in ReadUserDTO getAuthenticatedUserFromSecurityContext() = "+ user);
+        System.out.println("---------------------");
         return getByEmail(user.getEmail()).orElseThrow();
 
     }
@@ -48,10 +52,12 @@ public class UserService {
 public void syncWithIdp(OAuth2User oAuth2User, boolean forceSync) {
         Map<String,Object> attributes = oAuth2User.getAttributes();
     //public static final String CLAIMS_NAMESPACE = "https://alhas.com/roles"
-    System.out.println(" role1  "+ attributes.get(SecurityUtils.CLAIMS_NAMESPACE));
+    System.out.println(" role donne par attributes.get(SecurityUtils.CLAIMS_NAMESPACE)  "+ attributes.get(SecurityUtils.CLAIMS_NAMESPACE));
 //        oAuth2User.getAttributes().forEach((key, value) -> {})
    User user= SecurityUtils.mapOauth2AttributesToUser(attributes);
-    System.out.println(" user in  syncWithIdp(OAuth2Use  "+ user);
+    System.out.println(" --------------------------- ");
+    System.out.println(" User user = SecurityUtils.mapOauth2AttributesToUser(attributes) =   "+ user);
+    System.out.println(" --------------------------- ");
     this.authoritiesService=user.getAuthorities();
 
     Optional<User> existingUser= userRepository.findOneByEmail(user.getEmail());
@@ -72,7 +78,9 @@ public void syncWithIdp(OAuth2User oAuth2User, boolean forceSync) {
     }else {
 //        UUID uuid= UUID.randomUUID();
 //        user.setPublicId(uuid);
-       System.out.println(" role2 "+ user.getAuthorities());
+        System.out.println(" --------------------------- ");
+       System.out.println(" role2 gethAuthorities  "+ user.getAuthorities());
+        System.out.println(" --------------------------- ");
         userRepository.saveAndFlush(user);
     }
 }
@@ -87,7 +95,7 @@ public void syncWithIdp(OAuth2User oAuth2User, boolean forceSync) {
            userToUpdate.setImageUrl(user.getImageUrl());
            userToUpdate.setAuthorities(user.getAuthorities());
            //UUID uuid= UUID.randomUUID();
-           //userToUpdate.setPublicId(uuid);
+           userToUpdate.setPublicId(user.getPublicId());
            userRepository.saveAndFlush(userToUpdate);
 
         }

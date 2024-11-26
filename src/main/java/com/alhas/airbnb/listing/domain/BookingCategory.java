@@ -3,9 +3,9 @@ package com.alhas.airbnb.listing.domain;
 public enum BookingCategory {
 
     ALL,
-    AMAZING_VIEW,
+    AMAZING_VIEWS,
     OMG,
-    TREEHOUSE,
+    TREEHOUSES,
     FARMS,
     TINY_HOMES,
     LAKE,
@@ -19,7 +19,9 @@ public enum BookingCategory {
     TOWER,
     CAVES,
     LUXES,
-    CHEFS
+    CHEFS,
+    SKING,
+    CAMPING
 
 
 
