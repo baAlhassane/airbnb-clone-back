@@ -25,6 +25,20 @@ spring:
     properties:
       hibernate:
         default_schema: airbnb_clone
+  security:
+    oauth2:
+      client:
+        registration:
+          okta: # Identifiant unique pour votre fournisseur
+            client-id: ${AUTH0_CLIENT_ID}
+            client-secret: ${AUTH0_CLIENT_SECRET}
+            scope: openid, profile, email
+            redirect-uri: "{baseUrl}/login/oauth2/code/okta"
+            authorization-grant-type: authorization_code
+            client-name: Okta
+        provider:
+          okta: # Informations sur le fournisseur Auth0
+            issuer-uri: https://dev-lbu4c820m2nza8vh.us.auth0.com/
   liquibase:
     contexts: dev
     change-log: classpath:db/changelog/master.xml
@@ -44,7 +58,9 @@ okta:
     issuer: https://dev-lbu4c820m2nza8vh.us.auth0.com/
     client-id: ${AUTH0_CLIENT_ID}
     client-secret: ${AUTH0_CLIENT_SECRET}
+    redirect-uri: "{baseUrl}/login/oauth2/code/okta"
 
 application:
   auth0:
     role-landlord-id: rol_bMjiQLmAN3LUSbqi
+

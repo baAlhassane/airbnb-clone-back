@@ -11,6 +11,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -32,10 +34,16 @@ public class SecurityConfiguration {
                         .authenticated())
                 .csrf(csrfToken -> csrfToken.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestAttributeHandler))
-                .oauth2Login(Customizer.withDefaults())
+               // .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .defaultSuccessUrl("http://localhost:4200/", true)) // Ajout de la redirection vers Angular après la connexion
                 .oauth2ResourceServer(auth2ResourceServer -> auth2ResourceServer.jwt(Customizer.withDefaults()))
                 .oauth2Client(Customizer.withDefaults());
         return http.build();
+    }
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withJwkSetUri("https://dev-lbu4c820m2nza8vh.us.auth0.com/.well-known/jwks.json").build();
     }
 
 

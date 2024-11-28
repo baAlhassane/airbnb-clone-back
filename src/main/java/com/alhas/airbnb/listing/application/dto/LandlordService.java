@@ -3,16 +3,19 @@ package com.alhas.airbnb.listing.application.dto;
 import com.alhas.airbnb.listing.domain.Listing;
 import com.alhas.airbnb.listing.mapper.ListingMapper;
 import com.alhas.airbnb.listing.repository.ListingRepository;
+import com.alhas.airbnb.sharedkernel.service.State;
 import com.alhas.airbnb.user.application.dto.Auth0Service;
 import com.alhas.airbnb.user.application.dto.ReadUserDTO;
 import com.alhas.airbnb.user.application.dto.UserService;
 import com.alhas.airbnb.user.domain.User;
 import com.alhas.airbnb.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 @Service
 public class LandlordService {
@@ -67,5 +70,25 @@ public class LandlordService {
         auth0Service.addLandlordRoleToUser(userConnected);
 
         return listingMapper.listingToCreatedLinstingDTO(savaListing);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<DisplayCardListingDTO> getAllProperties(ReadUserDTO landlord) {
+        List<Listing> properties = listingRepository.findAllByLandlordPublicId(landlord.getPublicI());
+        return listingMapper.listingToDisplayCardListingDTO(properties);
+    }
+
+
+    @Transactional
+    public State<UUID, String> delete(UUID publicId, ReadUserDTO landlord) {
+        long deletedSuccessfully = listingRepository.deleteByPublicIdAndLandlordPublicId(publicId, landlord.getPublicI());
+        if(deletedSuccessfully >0){
+            return State.<UUID, String>builder().forSuccess(publicId);
+        }
+        else{
+            return State.<UUID, String>builder().forUnauthorized("user not authorized to delete this listing ");
+        }
+
     }
 }

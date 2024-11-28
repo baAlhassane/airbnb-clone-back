@@ -2,11 +2,16 @@ package com.alhas.airbnb.listing.mapper;
 
 
 import com.alhas.airbnb.listing.application.dto.CreatedListingDTO;
+import com.alhas.airbnb.listing.application.dto.DisplayCardListingDTO;
 import com.alhas.airbnb.listing.application.dto.SaveListingDTO;
 import com.alhas.airbnb.listing.application.dto.sub.ListingInfoDTO;
+import com.alhas.airbnb.listing.application.dto.vo.PriceVO;
 import com.alhas.airbnb.listing.domain.Listing;
+import com.nimbusds.openid.connect.sdk.Display;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring",
         uses = {ListingPictureMapper.class})
@@ -31,6 +36,16 @@ public interface ListingMapper {
 
     CreatedListingDTO listingToCreatedLinstingDTO(Listing listing);
 
+    @Mapping(target = "cover", source = "pictures")
+    List<DisplayCardListingDTO> listingToDisplayCardListingDTO(List<Listing> listing);
+
+@Mapping(target = "cover", source = "pictures", qualifiedByName = "extract-cover")
+DisplayCardListingDTO listingToDisplayCardListingDTO(Listing listing);
+
+default PriceVO  mapPriceToPriveVO(int price) {
+
+    return new PriceVO(price);
+}
 
 
 
