@@ -61,12 +61,12 @@ public class ReadUserDTO {
         this.firstName = firstName;
     }
 
-    public UUID getPublicI() {
+    public UUID getPublicId() {
         return publicId;
     }
 
-    public void setPublicI(UUID publicI) {
-        this.publicId = publicI;
+    public void setPublicId(UUID publicId) {
+        this.publicId = publicId;
     }
 
     @Override

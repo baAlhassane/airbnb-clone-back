@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record LandlordListingDTO(
         @NotNull
-        String firstname,
+        String firstName,
         @NotNull
         String imageUrl
 ) {

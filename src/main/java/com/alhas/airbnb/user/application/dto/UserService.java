@@ -52,13 +52,29 @@ public class UserService {
 public void syncWithIdp(OAuth2User oAuth2User, boolean forceSync) {
         Map<String,Object> attributes = oAuth2User.getAttributes();
     //public static final String CLAIMS_NAMESPACE = "https://alhas.com/roles"
+    System.out.println(" --------------------------- ");
+    System.out.println(" ");
     System.out.println(" role donne par attributes.get(SecurityUtils.CLAIMS_NAMESPACE)  "+ attributes.get(SecurityUtils.CLAIMS_NAMESPACE));
 //        oAuth2User.getAttributes().forEach((key, value) -> {})
+    System.out.println(" ");
    User user= SecurityUtils.mapOauth2AttributesToUser(attributes);
-    System.out.println(" --------------------------- ");
+    System.out.println(" ");
+    System.out.println(" ------%%%%%%%%%%%%%%%%%%%%--------------------- ");
+    System.out.println("  ");
+    System.out.println(" ");
     System.out.println(" User user = SecurityUtils.mapOauth2AttributesToUser(attributes) =   "+ user);
-    System.out.println(" --------------------------- ");
     this.authoritiesService=user.getAuthorities();
+    System.out.println(" ");
+    System.out.println(" ----------------%%%%%%%%%%----------- ");
+
+    Optional<User> userOpt = userRepository.findOneByEmail(user.getEmail());
+    if (userOpt.isPresent()) {
+        User user1 = userOpt.get();
+       // System.out.println("Authorities: " + user1.getAuthorities());
+        System.out.println("Size of Authorities: " + user.getAuthorities().size());
+        this.authoritiesService=user1.getAuthorities();
+    }
+    System.out.println(" -----------%%%%%%%%%%%---------------- ");
 
     Optional<User> existingUser= userRepository.findOneByEmail(user.getEmail());
     if(existingUser.isPresent()){

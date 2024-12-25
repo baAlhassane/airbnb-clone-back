@@ -3,6 +3,7 @@ package com.alhas.airbnb.infrastructure;
 import org.apache.catalina.security.SecurityUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +31,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain configuration(final HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestAttributeHandler = new CsrfTokenRequestAttributeHandler();
         requestAttributeHandler.setCsrfRequestAttributeName(null);
-        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest()
+        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers(HttpMethod.GET, "api/tenant-listing/get-all-by-category").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/tenant-listing/get-one").permitAll()
+                        .requestMatchers(HttpMethod.GET,"assets/*").permitAll()
+                        .anyRequest()
                         .authenticated())
                 .csrf(csrfToken -> csrfToken.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestAttributeHandler))

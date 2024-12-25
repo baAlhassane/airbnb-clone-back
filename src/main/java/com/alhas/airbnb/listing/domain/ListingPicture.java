@@ -22,10 +22,10 @@ public class ListingPicture extends AbstractAuditingEntity<Long> {
 
     @Lob
     @Column(name ="file" ,nullable = false)
-    private byte[] picture;
+    private byte[] file;
 
     @Column(name = "file_content_type")
-    private String fileContType;
+    private String fileContentType;
 
     @Column(name = "is_cover")
     private boolean isCover;
@@ -46,20 +46,20 @@ public class ListingPicture extends AbstractAuditingEntity<Long> {
         this.listing = listing;
     }
 
-    public byte[] getPicture() {
+/*    public byte[] getPicture() {
         return picture;
     }
 
     public void setPicture(byte[] picture) {
         this.picture = picture;
+    }*/
+
+    public String getFileContentType() {
+        return fileContentType;
     }
 
-    public String getFileContType() {
-        return fileContType;
-    }
-
-    public void setFileContType(String fileContType) {
-        this.fileContType = fileContType;
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
     }
 
     public boolean isCover() {
@@ -70,16 +70,34 @@ public class ListingPicture extends AbstractAuditingEntity<Long> {
         isCover = cover;
     }
 
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ListingPicture that = (ListingPicture) o;
-        return isCover == that.isCover && Objects.deepEquals(picture, that.picture) && Objects.equals(fileContType, that.fileContType);
+        return isCover == that.isCover && Objects.deepEquals(file, that.file) && Objects.equals(fileContentType, that.fileContentType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Arrays.hashCode(picture), fileContType, isCover);
+        return Objects.hash(Arrays.hashCode(file), fileContentType, isCover);
+    }
+
+    @Override
+    public String toString() {
+        return "ListingPicture{" +
+                "picture = " + file.length +
+                //", picture=" + Arrays.toString(picture) +
+                " fileContType='" + fileContentType + '\'' +
+                " isCover=" + isCover +
+                '}';
     }
 }

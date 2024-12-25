@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LandlordService {
@@ -57,7 +58,7 @@ public class LandlordService {
         System.out.println(" user in  createdListingDTO(SaveListingDTO saveListingDTO) : "+user);
         System.out.println(" ----------------  ");
 
-        userConnected.setPublicI(user.get().getPublicId());
+        userConnected.setPublicId(user.get().getPublicId());
 
         newListing.setLandlordPublicId(user.get().getPublicId());
        // newListing.setPublicId(user.get().getPublicId());
@@ -75,14 +76,28 @@ public class LandlordService {
 
     @Transactional(readOnly = true)
     public List<DisplayCardListingDTO> getAllProperties(ReadUserDTO landlord) {
-        List<Listing> properties = listingRepository.findAllByLandlordPublicId(landlord.getPublicI());
-        return listingMapper.listingToDisplayCardListingDTO(properties);
+        System.out.println(" ----------------  ");
+        System.out.println(" methode de getAllproperties . Argument landlord : "+landlord);
+        //Optional<User> user=  userRepository.findOneByEmail(landlord.getEmail());
+        //System.out.println("userRepository.findOneByEmail(landlord.getEmail())=  "+user);
+        List<Listing> properties = listingRepository.findAllByLandlordPublicIdFetchCoverPicture(landlord.getPublicId());
+        System.out.println(" methode de getAllproperties List<Listing> properties =  "+properties);
+        System.out.println(" methode de getAllproperties List<Listing> properties landlord.=  "+properties);
+        System.out.println(" methode de getAllproperties List<Listing> properties[0] =  " +properties.get(2).getPictures()
+                .stream().map( m-> m.getFile()));
+
+        System.out.println("   ");
+        System.out.println(" ----------------  ");
+
+
+
+        return listingMapper.listingToDisplayCardListingDTOs(properties);
     }
 
 
     @Transactional
     public State<UUID, String> delete(UUID publicId, ReadUserDTO landlord) {
-        long deletedSuccessfully = listingRepository.deleteByPublicIdAndLandlordPublicId(publicId, landlord.getPublicI());
+        long deletedSuccessfully = listingRepository.deleteByPublicIdAndLandlordPublicId(publicId, landlord.getPublicId());
         if(deletedSuccessfully >0){
             return State.<UUID, String>builder().forSuccess(publicId);
         }
@@ -91,4 +106,7 @@ public class LandlordService {
         }
 
     }
+
+
+
 }

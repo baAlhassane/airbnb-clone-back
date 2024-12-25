@@ -61,9 +61,12 @@ public class AuthRessource {
             userService.syncWithIdp(user,forceRecync);
 
            ReadUserDTO connectedUser= userService.getAuthenticatedUserFromSecurityContext();
-           Set<String> roles =userService.getUserRoles().stream().
-                   map(authority -> authority.getName()).collect(Collectors.toSet());
-              connectedUser.setAuthorities(roles);
+//           Set<String> roles =userService.getUserRoles().stream().
+//                   map(authority -> authority.getName()).collect(Collectors.toSet());
+           System.out.println(" @GetMapping(\"/get-authenticated-user\") ");
+           System.out.println(" ReadUserDTO connectedUser= userService.getAuthenticatedUserFromSecurityContext()= "+connectedUser);
+          // System.out.println(" ReadUserDTO roles= "+roles);
+             // connectedUser.setAuthorities(roles);
             return new ResponseEntity<>(connectedUser, HttpStatus.OK);
 
         }

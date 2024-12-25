@@ -20,11 +20,12 @@ public interface ListingPictureMapper {
     @Mapping(target = "createdDate", ignore = true)
     @Mapping(target = "lastModifiedDate", ignore = true)
     @Mapping(target = "cover", source = "isCover")
-    @Mapping(target = "picture", source = "file")
-    @Mapping(target = "fileContType", source = "fileContentType") // Mappage pour le content type
+    @Mapping(target = "file", source = "file")
+    @Mapping(target = "fileContentType", source = "fileContentType") // Mappage pour le content type
     ListingPicture pictureDTOToListingPicture(PictureDTO pictureDTO);
 
     List<PictureDTO> listingPictureToPictureDTO(List<ListingPicture> listingPictureList);
+
   @Mapping(target = "isCover",source = "cover")
     PictureDTO convertToPictureDTO(ListingPicture listingPicture);
 

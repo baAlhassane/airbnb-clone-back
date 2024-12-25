@@ -34,7 +34,7 @@ public class User extends AbstractAuditingEntity<Long> {
     @Column(name = "public_id", nullable = false)
     private UUID publicId;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
     joinColumns= {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")}

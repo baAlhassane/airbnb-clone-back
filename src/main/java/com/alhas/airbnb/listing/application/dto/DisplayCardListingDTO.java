@@ -12,5 +12,7 @@ public record DisplayCardListingDTO(
         PictureDTO cover,
         BookingCategory category,
         UUID publicId
+
+
 ) {
 }

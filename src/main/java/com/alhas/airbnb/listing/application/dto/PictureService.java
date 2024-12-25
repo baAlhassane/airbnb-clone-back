@@ -32,4 +32,33 @@ public class PictureService {
           listingPictureRepository.saveAll(listingPictures);
         return listingPictureMapper.listingPictureToPictureDTO(listingPictures.stream().toList());
     }
+
+
+    public List<PictureDTO> convertFileTo64Base(List<PictureDTO> pictures, Listing listing) {
+        Set<ListingPicture> listingPictures= listingPictureMapper.pictureDTOsToListingPicture(pictures);
+
+        boolean isFirst = true;
+        for(ListingPicture listingPicture: listingPictures){
+            listingPicture.setListing(listing);
+            listingPicture.setCover(isFirst);
+            isFirst = false;
+        }
+        listingPictureRepository.saveAll(listingPictures);
+        return listingPictureMapper.listingPictureToPictureDTO(listingPictures.stream().toList());
+    }
+
+
+    public DisplayCardListingDTO getPicturesByListing(Listing listing) {
+//       listingPictureRepository.findByListing(listing).stream()
+//                .map(listingPicture -> {
+//                    PictureDTO dto = listingPictureMapper.convertToPictureDTO(listingPicture);
+//                    dto.setBase64(Base64.getEncoder().encodeToString(listingPicture.getPicture())); // Ajouter base64
+//                    return dto;
+//                }).collect(Collectors.toList());
+
+
+        return null ;
+    }
+
+
 }

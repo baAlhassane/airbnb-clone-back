@@ -27,7 +27,8 @@ public record PictureDTO(
     @Override
     public String toString() {
         return "PictureDTO{" +
-                "fileContentType='" + fileContentType + '\'' +
+                "file= " + file.length +
+                ", fileContentType='" + fileContentType + '\'' +
                 ", isCover=" + isCover +
                 '}';
     }

@@ -1,6 +1,6 @@
 package com.alhas.airbnb.listing.application.dto;
 
-import com.alhas.airbnb.listing.application.dto.sub.DescritionDTO;
+import com.alhas.airbnb.listing.application.dto.sub.DescriptionDTO;
 import com.alhas.airbnb.listing.application.dto.sub.ListingInfoDTO;
 import com.alhas.airbnb.listing.application.dto.sub.PictureDTO;
 import com.alhas.airbnb.listing.application.dto.vo.PriceVO;
@@ -23,7 +23,7 @@ public class SaveListingDTO {
     ListingInfoDTO infos;
     @NotNull
     @Valid
-    DescritionDTO description;
+    DescriptionDTO description;
     @NotNull
     @Valid
     PriceVO price;
@@ -54,11 +54,11 @@ public class SaveListingDTO {
         this.infos = infos;
     }
 
-    public @NotNull @Valid DescritionDTO getDescription() {
+    public @NotNull @Valid DescriptionDTO getDescription() {
         return description;
     }
 
-    public void setDescription(@NotNull @Valid DescritionDTO description) {
+    public void setDescription(@NotNull @Valid DescriptionDTO description) {
         this.description = description;
     }
 

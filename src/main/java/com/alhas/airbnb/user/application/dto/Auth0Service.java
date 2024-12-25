@@ -39,9 +39,9 @@ public class Auth0Service {
                 .noneMatch(role-> role.equals(SecurityUtils.ROLE_LANDLORD))){
             try {
                 String accessToken=this.getAccessToken();
-                assignRoleById(accessToken, readUserDTO.getEmail(), readUserDTO.getPublicI(), roleLandlordId);
+                assignRoleById(accessToken, readUserDTO.getEmail(), readUserDTO.getPublicId(), roleLandlordId);
             } catch (Auth0Exception e) {
-                throw new UserException(String.format(" not possible to assign %s to %s",roleLandlordId,readUserDTO.getPublicI()));
+                throw new UserException(String.format(" not possible to assign %s to %s",roleLandlordId,readUserDTO.getPublicId()));
 
             }
         }

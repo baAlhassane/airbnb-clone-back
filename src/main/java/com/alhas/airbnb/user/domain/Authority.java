@@ -1,19 +1,19 @@
 package com.alhas.airbnb.user.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "authority")
 public class Authority implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
@@ -29,6 +29,9 @@ public class Authority implements Serializable {
     public void setName(@NotNull @Size(max = 50) String name) {
         this.name = name;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {

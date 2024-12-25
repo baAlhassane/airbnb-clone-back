@@ -28,6 +28,7 @@ public class Listing extends AbstractAuditingEntity<Long> {
 @Column(name = "public_id", nullable = false, unique = true, updatable = false)
     private UUID publicId;
 
+    @Column(name = "title")
     private  String title;
 
     @Column(name = "description")
@@ -51,7 +52,7 @@ public class Listing extends AbstractAuditingEntity<Long> {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
-    private BookingCategory bookingCategory;
+    private BookingCategory category;
 
     @Column(name = "location")
     private String location;
@@ -151,12 +152,12 @@ public class Listing extends AbstractAuditingEntity<Long> {
         this.price = price;
     }
 
-    public BookingCategory getBookingCategory() {
-        return bookingCategory;
+    public BookingCategory getCategory() {
+        return category;
     }
 
-    public void setBookingCategory(BookingCategory bookingCategory) {
-        this.bookingCategory = bookingCategory;
+    public void setCategory(BookingCategory category) {
+        this.category = category;
     }
 
     public String getLocation() {
@@ -180,27 +181,29 @@ public class Listing extends AbstractAuditingEntity<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Listing listing = (Listing) o;
-        return beds == listing.beds && price == listing.price && Objects.equals(title, listing.title) && Objects.equals(description, listing.description) && Objects.equals(guests, listing.guests) && Objects.equals(bathrooms, listing.bathrooms) && bookingCategory == listing.bookingCategory && Objects.equals(location, listing.location) && Objects.equals(landlordPublicId, listing.landlordPublicId);
+        return beds == listing.beds && price == listing.price && Objects.equals(title, listing.title) && Objects.equals(description, listing.description) && Objects.equals(guests, listing.guests) && Objects.equals(bathrooms, listing.bathrooms) && category == listing.category && Objects.equals(location, listing.location) && Objects.equals(landlordPublicId, listing.landlordPublicId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, guests, beds, bathrooms, price, bookingCategory, location, landlordPublicId);
+        return Objects.hash(title, description, guests, beds, bathrooms, price, category, location, landlordPublicId);
     }
 
     @Override
     public String toString() {
         return "Listing{" +
-                "landlordPublicId=" + landlordPublicId +
-                ", location='" + location + '\'' +
-                ", bookingCategory=" + bookingCategory +
-                ", price=" + price +
-                ", bathrooms='" + bathrooms + '\'' +
-                ", beds=" + beds +
-                ", guests='" + guests + '\'' +
-                ", description='" + description + '\'' +
+                "publicId=" + publicId +
                 ", title='" + title + '\'' +
-                ", publicId=" + publicId +
+                ", description='" + description + '\'' +
+                ", guests=" + guests +
+                ", bedrooms=" + bedrooms +
+                ", beds=" + beds +
+                ", bathrooms=" + bathrooms +
+                ", price=" + price +
+                ", bookingCategory=" +category +
+                ", location='" + location + '\'' +
+                ", landlordPublicId=" + landlordPublicId +
+                ", pictures=" + pictures +
                 '}';
     }
 }
